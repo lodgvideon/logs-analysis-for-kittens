@@ -1,0 +1,33 @@
+# формат парсинга [код ответа] [Тип запроса] [/путь?параметры]
+- regexp: '[0-9]{3} (GET|POST|PUT|DELETE|OPTIONS|PATCH|HEAD|CONNECT|TRACE).*'
+  method: '$1'
+  requests:
+    - regexp: '(/post)'
+      tag: '/post'
+      blacklisted: false
+      description: "Запрос типа Post"
+      actions:
+        - regexp: '([aA]ction[0-9]+)'
+          tag: '/post ($1)'
+          blacklisted: false
+          description: "Запрос типа Post со спецификацией по Экшенам"
+    - regexp: '/about'
+      tag: '/about'
+      blacklisted: false
+      description: "Запрос страницы about"
+    - regexp: '/search'
+      tag: '/search'
+      blacklisted: false
+      description: "Поисковые запросы"
+    - regexp: '/profile/[a-z0-9_*+]+'
+      tag: '/profile/{user_id}'
+      blacklisted: false
+      description: "Запрос Профиля пользователя"
+    - regexp: '/product/[a-z0-9_*+]+'
+      tag: '/product/{product_id}'
+      blacklisted: false
+      description: "Запрос Профиля Продукта"
+    - regexp: '/$'
+      tag: '/'
+      blacklisted: false
+      description: "Корня"

@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -e
+
+
+while getopts i:o: flag
+do
+    case "${flag}" in
+        i) input_file=${OPTARG};;
+        o) output_file=${OPTARG};;
+    esac
+done
+
+if [ -z "${input_file}" ] || [ -z "${output_file}" ]; then
+    echo "there are no required arguments (-i || -o)"
+    return 1
+fi
+
+if [[ ${INVALID_FLAGS} != "" ]]; then
+  return 1
+fi
+ACCESS_LOG_FILTERED_PAYLOAD=${output_file}
+chmod +x ./scripts/parse_api
+cat ${input_file} |parallel --will-cite -N0 --jobs 73% --keep-order --block 10M --linebuffer --pipe ./scripts/api_stream > "${ACCESS_LOG_FILTERED_PAYLOAD}"

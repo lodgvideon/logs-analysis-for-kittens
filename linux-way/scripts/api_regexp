@@ -1,0 +1,3 @@
+^GET /search
+^GET /about
+^POST /post.*[aA]ction1

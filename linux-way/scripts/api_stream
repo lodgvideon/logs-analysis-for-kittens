@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+cat -| awk -F\| '{ if (NF<12) print $0;}' \
+ |awk -F'|' '{ if (NF<11) print $0;}'\
+ |awk -F'|' '{printf("%s | %s | %s   \n", $4, $8, $10)}'\
+ |perl -pe 's/ HTTP\/[-.0-9\t ]+/ /'\
+ |grep -E -f ./scripts/api_regexp\
+ |perl -pe 's/ / | /'\
+ |awk -F\| 'BEGIN{OFS="|"} {gsub("/{2,}","/",$1); print $0}'\
+ |awk -F' [|] ' '{printf("%s %s|%s|%s|%s|%s\n", $1,$2,$1,$2,$3,$4,$5)}'\
+ |awk -F'|' 'BEGIN{OFS="|"} {sub(/\?.*/,"",$1); print}'
+
+
+
