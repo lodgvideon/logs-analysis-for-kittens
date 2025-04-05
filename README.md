@@ -82,8 +82,7 @@ docker-compose -f ./docker-compose/docker-compose.yml  up clickhouse-01 -d
 #### Выполним скрипты в папке ./clickhouse-way/
 
 1. [1_CreateDictionary.sql](./clickhouse-way/sql/1_CreateDictionary.sql) - Скрипт создания таблицы со словарем
-   регулярных выражений.
-   Словарь расположен: [./docker-compose/clickhouse/user_files/regexp_dictionary.yaml](./docker-compose/clickhouse/user_files/regexp_dictionary.yaml)`
+   регулярных выражений расположенным в [regexp_dictionary.yaml](./docker-compose/clickhouse/user_files/regexp_dictionary.yaml)`
 2. [2_CreateTable_v2.sql](./clickhouse-way/sql/2_CreateTable_v2.sql) - Скрипт создания таблицы с автоматическим
    тегированием через Словарь регулярных выражений.
 3. [3_CreateAggregatesView.sql](./clickhouse-way/sql/3_CreateAggregatesView.sql) - Скрипт создания MaterializedViews для
@@ -102,9 +101,9 @@ docker-compose -f ./docker-compose/docker-compose.yml  up clickhouse-01 -d
 
 #### Описание скриптов
 
-1. [./clickhouse-way/scripts/clickhouse_file_inserter.py](./clickhouse-way/scripts/clickhouse_file_inserter.py) - Пример
+1. [clickhouse_file_inserter.py](./clickhouse-way/scripts/clickhouse_file_inserter.py) - Пример
    скрипта для ручной заливки файла.
-2. [./clickhouse-way/scripts/clickhouse_payload_preparer.py](./clickhouse-way/scripts/clickhouse_payload_preparer.py) -
+2. [clickhouse_payload_preparer.py](./clickhouse-way/scripts/clickhouse_payload_preparer.py) -
    Пример скрипта - который считает профиль и формирует на его основе Payload в
    формате [HTTP_JSON](https://yandex.cloud/en/docs/load-testing/concepts/payloads/http-json)
 
